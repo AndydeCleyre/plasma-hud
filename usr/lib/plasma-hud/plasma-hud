@@ -197,7 +197,7 @@ class KdeConfig(configparser.ConfigParser):
         if not self.has_option(section, option):
             self.set(section, option, value)
 
-    def save(self): 
+    def save(self):
         with open(self.filename, 'w') as fp:
             self.write(fp, space_around_delimiters=False)
 
@@ -255,6 +255,7 @@ def get_menu(menuKeys):
 
     plasmahudrc = PlasmaHudConfig()
     matching = plasmahudrc.get('General', 'Matching', fallback='fuzzy')
+    hud_title = plasmahudrc.get('Style', 'Title', fallback='HUD')
     font_name = plasmahudrc.get('Style', 'Font', fallback=font_name)
     bg_color = plasmahudrc.get('Colors', 'Background', fallback=bg_color)
     fg_color = plasmahudrc.get('Colors', 'Foreground', fallback=fg_color)
@@ -291,7 +292,7 @@ def get_menu(menuKeys):
         '-i', # Case insensitive filtering
         '-location', '1',
         '-width', '100',
-        '-p', 'HUD', # Text beside filter textfield
+        '-p', hud_title, # Text beside filter textfield
         '-lines', '10',
         '-font', font_name,
         '-dpi', str(dpi),
@@ -597,12 +598,12 @@ def hud():
                                    gtk_app_object_path,
                                    gtk_unity_object_path]))
         appmenu_success = try_gtk_interface(gtk_bus_name, gtk_menubar_object_path, gtk_actions_paths_list)
-    
+
     if not appmenu_success:
         if kde_appmenu_service_name and kde_appmenu_object_path:
             logging.debug('Trying KDE AppMenu interface')
             appmenu_success = try_dbusmenu_interface(kde_appmenu_service_name, kde_appmenu_object_path)
-    
+
     if not appmenu_success:
         logging.debug('Giving up')
 

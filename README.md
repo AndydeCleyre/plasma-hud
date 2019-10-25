@@ -88,6 +88,16 @@ If you manally create `~/.config/plasmahudrc` you can change any of the followin
 ```
 [General]
 Matching=fuzzy
+Sort=true
+WaitForAllMenuItems=true
+Lines=20
+
+[Icons]
+Enabled=true
+Theme=breeze-dark
+
+[Shortcuts]
+Enabled=true
 
 [Style]
 Font=Sans 10
@@ -98,6 +108,7 @@ Foreground=#eeeff0
 SelectedBackground=#062d25
 SelectedForeground=#1abc9c
 Borders=#000000
+ShortcutForeground=#888888
 ```
 
 * `[General] Matching=fuzzy` can be either `fuzzy` matching or `normal` matching where it matches a keyword exactly. See `man rofi | grep "\-matching" -A20` for more info.
